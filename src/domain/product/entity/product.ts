@@ -32,10 +32,7 @@ export default class Product implements ProductInterface {
         this.validate()
     }
 
-    get name(): string {
-        return this._name
-    }
-
+    
     changePrice(price: number) {
         this._price = price;
         this.validate();
@@ -44,10 +41,13 @@ export default class Product implements ProductInterface {
     get price(): number {
         return this._price
     }
-
+    
     get id(): string {
         return this._id
     }
-
-
+    
+    get name(): string {
+        return this._name
+    }
+    
 }
