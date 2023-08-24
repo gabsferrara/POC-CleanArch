@@ -1,28 +1,25 @@
 import express, {Request, Response} from "express";
 import ProductRepository from "../../product/repository/sequelize/product.repository";
 import ListProductUseCase from "../../../usecase/product/list/list.product.usecase";
+import CreateProductUsecase from "../../../usecase/product/create/create.product.usecase";
 
 export const productRoute = express.Router();
 
-// customerRoute.post('/', async (req: Request, res: Response) => {
-//     const usecase = new CreateProductUsecase(new CustomerRepository());
-//     try {
-//         const customerDto = {
-//             name: req.body.name,
-//             address: {
-//                 street: req.body.address.street,
-//                 city: req.body.address.city,
-//                 number: req.body.address.number,
-//                 zip: req.body.address.zip,
-//             }
-//         }
+productRoute.post('/', async (req: Request, res: Response) => {
+    const usecase = new CreateProductUsecase(new ProductRepository());
+    try {
+        const customerDto = {
+            type: req.body.type,
+            name: req.body.name,
+            price: req.body.price,
+        }
 
-//         const output = await usecase.execute(customerDto);
-//         res.send(output);
-//     } catch (err) {
-//         res.status(500).send(err)
-//     }
-// })
+        const output = await usecase.execute(customerDto);
+        res.send(output);
+    } catch (err) {
+        res.status(500).send(err)
+    }
+})
 
 productRoute.get('/', async (req: Request, res: Response) => {
     const usecase = new ListProductUseCase(new ProductRepository());
